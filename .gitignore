@@ -38,3 +38,6 @@ sysinfo.txt
 
 # Python compiled files
 *.pyc
+
+Assets/MapData.cs
+Assets/MapData.cs.meta
