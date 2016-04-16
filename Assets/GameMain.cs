@@ -24,8 +24,10 @@ public class GameMain : MonoBehaviour {
     }
 
     public void LateUpdate() {
+        Camera cam = Camera.main;
+        float xOffset = cam.orthographicSize * cam.aspect * .333f;
         Camera.main.transform.position = new Vector3(
-            player.transform.position.x,
+            player.transform.position.x + xOffset,
             Camera.main.transform.position.y,
             Camera.main.transform.position.z
         );
