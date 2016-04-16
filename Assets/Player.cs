@@ -30,93 +30,82 @@ static class Motion {
 }
 
 public class Player : MonoBehaviour {
-    private bool onGround;
-    private float jumpStartTime;
-    private float v0y;   // vertical velocity when jump started
-    private Vector2 fallStartPosition;
-
-    private const float distanceFromGround = .5f;
-
     // Keep track of how many intersections with currently have with the ground
-    private int groundCollisions = 0;
+    private int groundContacts = 0;
 
     // Movement in last FixedUpdate
     private Vector2 movement;
 
+    private Rigidbody2D myBody;
+    private Collider2D myCollider;
+
     void Start() {
+        myBody = gameObject.GetComponent<Rigidbody2D>();
+        myCollider = gameObject.GetComponent<Collider2D>();
+
         transform.position = new Vector2(0, 8);
         LeaveGround(0);
     }
 
     void FixedUpdate() {
-        if(onGround && Input.GetButton("Jump")) {
-            LeaveGround(Motion.jumpVelocity);
+        //Debug.Log("Number of ground contacts: " + groundContacts);
+        if(Input.GetButton("Jump")) {
+            if(groundContacts != 0) {
+                //Debug.Log("Jumping");
+                LeaveGround(Motion.jumpVelocity);
+            }
+            else {
+                //Debug.Log("Not on ground");
+            }
         }
         movement = Vector2.zero;
-        if(!onGround) {
-            float t = Time.time - jumpStartTime;
-            movement.y = fallStartPosition.y + Motion.GetYAtTime(v0y, t) - transform.position.y;
-        }
         movement.x = Time.deltaTime * Motion.horizontalVelocity;
         transform.position += new Vector3(movement.x, movement.y, 0);
+
+        groundContacts = 0;  // will be incresed by OnTriggerStay2D
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-
         ShapePickup pickup = other.GetComponent<ShapePickup>();
         if(pickup != null) {
             Debug.LogFormat("Got a pickup {0}", pickup);
             Destroy(other.gameObject);
             return;
         }
+    }
 
-        bool landed = IsLandCollision(other);
+    void OnCollisionEnter2D(Collision2D collision) {
+        bool landed = IsLandCollision(collision.collider);
         if(!landed) {
-            Debug.Log("Crashed into " + other);
-            gameObject.SetActive(false);
+            Debug.Log("Crashed into " + collision.gameObject);
+            enabled = false;
             return;
         }
 
-        ++groundCollisions;
-        //Debug.LogFormat("Collided with {0}, now {1}", other, groundCollisions);
-        onGround = true;
-        transform.position = new Vector2(transform.position.x, other.bounds.max.y + distanceFromGround);
+        //Debug.LogFormat("Collided with {0}, now {1}", other, groundContacts);
     }
 
-    void OnTriggerExit2D(Collider2D other) {
-        --groundCollisions;
-        Assert.IsTrue(groundCollisions >= 0);
-        //Debug.LogFormat("Exited {0}, now {1}", other, groundCollisions);
-        if(groundCollisions == 0 && onGround) {
-            LeaveGround(0);
-        }
+    void OnCollisionStay2D(Collision2D collision) {
+        ++groundContacts;
     }
 
     private bool IsLandCollision(Collider2D other) {
         Collider2D myCollider = GetComponent<Collider2D>();
-        Rigidbody2D myBody = GetComponent<Rigidbody2D>();
         Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);
         Debug.DrawLine(other.bounds.min, other.bounds.max, Color.green);
-
-        Vector2 myPos = myBody.position + movement;
-        Vector2 otherPos = other.attachedRigidbody.position;
 
         if(movement.y > 0) {
             Debug.LogFormat("Moving upwards at speed {0} - this is not landing", movement.y);
             return false;
         }
-        if(myPos.x < other.bounds.min.x) {
-            Debug.LogWarningFormat("My x {0} not between {1} and {2}, movement {3}", myPos.x, other.bounds.min.x, other.bounds.max.x, movement);
-            return false;
-        }
-        return myPos.y > otherPos.y;
+        float penetration = other.bounds.max.y - myCollider.bounds.min.y;
+        return penetration < .5f;
     }
 
 
     private void LeaveGround(float initialVelocity) {
-        onGround = false;
-        jumpStartTime = Time.time;
-        fallStartPosition = transform.position;
-        v0y = initialVelocity;
+        groundContacts = 0;
+        Rigidbody2D myRigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody.AddForce(Vector2.up * initialVelocity / myRigidbody.mass * 100);
     }
 }
