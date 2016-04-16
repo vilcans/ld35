@@ -114,8 +114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabList:
   - {fileID: 113570, guid: d89f70fe7df224b94a6125cf267a077f, type: 2}
-  - {fileID: 171652, guid: e814f050446d64da9866ad8bfdc3dafc, type: 2}
+  - {fileID: 122374, guid: 26eb4bb30c8a64a918740b02cc07a64e, type: 2}
   - {fileID: 137410, guid: c754c8e5c64884d61a6f53b9e90e600c, type: 2}
+  - {fileID: 171652, guid: e814f050446d64da9866ad8bfdc3dafc, type: 2}
   startPosition: {x: 0, y: 2.2}
 --- !u!4 &1823573765
 Transform:
