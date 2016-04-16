@@ -40,6 +40,9 @@ public class Player : MonoBehaviour {
     // Keep track of how many intersections with currently have with the ground
     private int groundCollisions = 0;
 
+    // Movement in last FixedUpdate
+    private Vector2 movement;
+
     void Start() {
         transform.position = new Vector2(0, 8);
         LeaveGround(0);
@@ -49,16 +52,23 @@ public class Player : MonoBehaviour {
         if(onGround && Input.GetButton("Jump")) {
             LeaveGround(Motion.jumpVelocity);
         }
-        Vector2 pos = transform.position;
+        movement = Vector2.zero;
         if(!onGround) {
             float t = Time.time - jumpStartTime;
-            pos.y = fallStartPosition.y + Motion.GetYAtTime(v0y, t);
+            movement.y = fallStartPosition.y + Motion.GetYAtTime(v0y, t) - transform.position.y;
         }
-        pos.x += Time.deltaTime * Motion.horizontalVelocity;
-        transform.position = pos;
+        movement.x = Time.deltaTime * Motion.horizontalVelocity;
+        transform.position += new Vector3(movement.x, movement.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+        bool landed = IsLandCollision(other);
+        if(!landed) {
+            Debug.Log("Crash!");
+            gameObject.SetActive(false);
+            return;
+        }
+
         ++groundCollisions;
         //Debug.LogFormat("Collided with {0}, now {1}", other, groundCollisions);
         onGround = true;
@@ -73,6 +83,27 @@ public class Player : MonoBehaviour {
             LeaveGround(0);
         }
     }
+
+    private bool IsLandCollision(Collider2D other) {
+        Collider2D myCollider = GetComponent<Collider2D>();
+        Rigidbody2D myBody = GetComponent<Rigidbody2D>();
+        Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);
+        Debug.DrawLine(other.bounds.min, other.bounds.max, Color.green);
+
+        Vector2 myPos = myBody.position + movement;
+        Vector2 otherPos = other.attachedRigidbody.position;
+
+        if(movement.y > 0) {
+            Debug.LogFormat("Moving upwards at speed {0} - this is not landing", movement.y);
+            return false;
+        }
+        if(myPos.x < other.bounds.min.x) {
+            Debug.LogWarningFormat("My x {0} not between {1} and {2}, movement {3}", myPos.x, other.bounds.min.x, other.bounds.max.x, movement);
+            return false;
+        }
+        return myPos.y > otherPos.y;
+    }
+
 
     private void LeaveGround(float initialVelocity) {
         onGround = false;
