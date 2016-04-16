@@ -3,13 +3,14 @@ using UnityEngine.Assertions;
 
 public class Player : MonoBehaviour {
 
-    private float jumpVelocity = 3;
-    private float horizontalVelocity = .25f;
+    private float jumpVelocity = 15;
+    private float horizontalVelocity = 12;
     private float verticalVelocity;
     private bool onGround;
 
     private const float distanceFromGround = .5f;
 
+    // Keep track of how many intersections with currently have with the ground
     private int groundCollisions = 0;
 
     void FixedUpdate() {
@@ -27,21 +28,19 @@ public class Player : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         ++groundCollisions;
-        Debug.LogFormat("Collided with {0}, now {1}", other, groundCollisions);
+        //Debug.LogFormat("Collided with {0}, now {1}", other, groundCollisions);
         onGround = true;
         verticalVelocity = 0;
         transform.position = new Vector2(transform.position.x, other.bounds.max.y + distanceFromGround);
-
-        //transform.position = 
     }
 
     void OnTriggerExit2D(Collider2D other) {
         --groundCollisions;
         Assert.IsTrue(groundCollisions >= 0);
-        Debug.LogFormat("Exited {0}, now {1}", other, groundCollisions);
+        //Debug.LogFormat("Exited {0}, now {1}", other, groundCollisions);
         if(groundCollisions == 0) {
             onGround = false;
-            Debug.Log("No longer on ground");
+            //Debug.Log("No longer on ground");
         }
     }
 }

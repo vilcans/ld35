@@ -33,7 +33,10 @@ public class GameMain : MonoBehaviour {
 
     private void CreateLevel() {
         GameObject floorPrefab = prefabs["Square"];
-        for(int col = 0; col < 4; ++col) {
+        for(int col = 0; col < 400; ++col) {
+            if(col % 7 == 0) {
+                continue;
+            }
             GameObject newObj = (GameObject)Instantiate(
                 floorPrefab,
                 new Vector2(col, 0),
