@@ -1,16 +1,36 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-public class Player : MonoBehaviour {
-
-    private float jumpVelocity = 21.4166666667f;
+static class Motion {
+    // Gravity
+    public const float g = 100;
 
     private const float bpm = 160;
     private const float squaresPerBeat = 4;
-    private float horizontalVelocity = squaresPerBeat * bpm / 60;
+    public const float secondsPerSquare = 60 / bpm / squaresPerBeat;
 
+    // Calculate physics settings for a specific jump
+
+    // How high to jump. E.g. 1 means you should land 1 square up
+    private const float y = 1;
+
+    // How far to jump
+    private const float jumpLength = 4;
+
+    // How long a jump is in seconds
+    private const float t = secondsPerSquare * jumpLength;
+
+    public const float jumpVelocity = y / t + (g * t) / 2;
+
+    public const float horizontalVelocity = 1 / Motion.secondsPerSquare;
+
+    public static float GetYAtTime(float v0y, float t) {
+        return v0y * t - .5f * (g * t * t);
+    }
+}
+
+public class Player : MonoBehaviour {
     private bool onGround;
-    private float gravity = 100;
     private float jumpStartTime;
     private float v0y;   // vertical velocity when jump started
     private Vector2 fallStartPosition;
@@ -27,15 +47,14 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate() {
         if(onGround && Input.GetButton("Jump")) {
-            LeaveGround(jumpVelocity);
+            LeaveGround(Motion.jumpVelocity);
         }
         Vector2 pos = transform.position;
         if(!onGround) {
             float t = Time.time - jumpStartTime;
-            float g = gravity;
-            pos.y = fallStartPosition.y + v0y * t - .5f * (g * t * t);
+            pos.y = fallStartPosition.y + Motion.GetYAtTime(v0y, t);
         }
-        pos.x += Time.deltaTime * horizontalVelocity;
+        pos.x += Time.deltaTime * Motion.horizontalVelocity;
         transform.position = pos;
     }
 
