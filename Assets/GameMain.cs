@@ -23,7 +23,7 @@ public class GameMain : MonoBehaviour {
         CreatePlayer();
     }
 
-    public void Update() {
+    public void LateUpdate() {
         Camera.main.transform.position = new Vector3(
             player.transform.position.x,
             Camera.main.transform.position.y,
