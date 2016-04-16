@@ -72,7 +72,7 @@ public class Player : MonoBehaviour {
 
         bool landed = IsLandCollision(other);
         if(!landed) {
-            Debug.Log("Crash!");
+            Debug.Log("Crashed into " + other);
             gameObject.SetActive(false);
             return;
         }
