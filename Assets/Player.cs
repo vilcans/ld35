@@ -62,6 +62,14 @@ public class Player : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+
+        ShapePickup pickup = other.GetComponent<ShapePickup>();
+        if(pickup != null) {
+            Debug.LogFormat("Got a pickup {0}", pickup);
+            Destroy(other.gameObject);
+            return;
+        }
+
         bool landed = IsLandCollision(other);
         if(!landed) {
             Debug.Log("Crash!");

@@ -40,19 +40,24 @@ public class GameMain : MonoBehaviour {
                 if(objectIndex == 0xff) {
                     continue;
                 }
-                GameObject prefab = prefabList[objectIndex];
-                GameObject newObj = (GameObject)Instantiate(
-                    prefab,
-                    new Vector2(col, MapData.height - row),
-                    Quaternion.identity
-                );
+                GameObject newObj = InstantiateByIndex(objectIndex);
+                newObj.transform.position = new Vector2(col, MapData.height - row);
             }
         }
     }
 
     private void CreatePlayer() {
-        player = (GameObject)Instantiate(prefabs["Circle"], startPosition, Quaternion.identity);
+        player = (GameObject)Instantiate(prefabs["Square"], startPosition, Quaternion.identity);
         player.name = "Player";
         player.AddComponent<Player>();
+    }
+
+    private GameObject InstantiateByIndex(int objectIndex) {
+        GameObject prefab = prefabList[objectIndex];
+        GameObject newObj = (GameObject)Instantiate(prefab);
+        if(prefab.name == "CirclePickup") {
+            /*ShapePickup pickup =*/ newObj.AddComponent<ShapePickup>();
+        }
+        return newObj;
     }
 }
