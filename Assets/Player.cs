@@ -40,8 +40,8 @@ public class Player : MonoBehaviour {
     private Collider2D myCollider;
 
     void Start() {
-        myBody = gameObject.GetComponent<Rigidbody2D>();
-        myCollider = gameObject.GetComponent<Collider2D>();
+        myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
+        myCollider = gameObject.GetComponentInChildren<Collider2D>();
 
         transform.position = new Vector2(0, 8);
         LeaveGround(0);

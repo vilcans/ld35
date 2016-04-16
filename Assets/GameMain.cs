@@ -48,7 +48,7 @@ public class GameMain : MonoBehaviour {
     }
 
     private void CreatePlayer() {
-        player = (GameObject)Instantiate(prefabs["Square"], startPosition, Quaternion.identity);
+        player = (GameObject)Instantiate(prefabs["Player"], startPosition, Quaternion.identity);
         player.name = "Player";
         player.AddComponent<Player>();
     }
