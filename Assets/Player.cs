@@ -106,6 +106,6 @@ public class Player : MonoBehaviour {
     private void LeaveGround(float initialVelocity) {
         groundContacts = 0;
         Rigidbody2D myRigidbody = GetComponent<Rigidbody2D>();
-        myRigidbody.AddForce(Vector2.up * initialVelocity / myRigidbody.mass * 100);
+        myRigidbody.AddForce(Vector2.up * initialVelocity / myRigidbody.mass / Time.deltaTime);
     }
 }
