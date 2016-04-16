@@ -9,6 +9,8 @@ public class GameMain : MonoBehaviour {
 
     private Dictionary<string, GameObject> prefabs;
 
+    private GameObject player;
+
     public void Start() {
 
         prefabs = new Dictionary<string, GameObject>();
@@ -19,6 +21,14 @@ public class GameMain : MonoBehaviour {
 
         CreateLevel();
         CreatePlayer();
+    }
+
+    public void Update() {
+        Camera.main.transform.position = new Vector3(
+            player.transform.position.x,
+            Camera.main.transform.position.y,
+            Camera.main.transform.position.z
+        );
     }
 
     private void CreateLevel() {
@@ -33,7 +43,7 @@ public class GameMain : MonoBehaviour {
     }
 
     private void CreatePlayer() {
-        GameObject player = (GameObject)Instantiate(prefabs["Circle"], startPosition, Quaternion.identity);
+        player = (GameObject)Instantiate(prefabs["Circle"], startPosition, Quaternion.identity);
         player.name = "Player";
         player.AddComponent<Player>();
     }
