@@ -34,15 +34,15 @@ public class GameMain : MonoBehaviour {
     }
 
     private void CreateLevel() {
-        //GameObject floorPrefab = prefabs["Square"];
         for(int col = 0; col < MapData.width; ++col) {
             for(int row = 0; row < MapData.height; ++row) {
                 byte objectIndex = MapData.tileData[row * MapData.width + col];
                 if(objectIndex == 0xff) {
                     continue;
                 }
+                GameObject prefab = prefabList[objectIndex];
                 GameObject newObj = (GameObject)Instantiate(
-                    prefabList[objectIndex],
+                    prefab,
                     new Vector2(col, MapData.height - row),
                     Quaternion.identity
                 );
