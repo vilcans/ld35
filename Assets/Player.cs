@@ -120,10 +120,10 @@ public class Player : MonoBehaviour {
 
     private void Die() {
         if(!alive) {
-            Debug.LogWarning("Already dead");
+            //Debug.LogWarning("Already dead");
             return;
         }
-        Debug.Log("Dying");
+        //Debug.Log("Dying");
         Instantiate(GameMain.instance.prefabs["PlayerExplosion"], transform.position, Quaternion.identity);
         GetComponentInChildren<Renderer>().enabled = false;
         alive = false;
