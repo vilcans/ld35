@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
         Square,
         Circle,
         Star,
+        Heart,
     }
 
     private Shape currentShape;
@@ -108,6 +109,9 @@ public class Player : MonoBehaviour {
             else if(name.StartsWith("Star")) {
                 SetShape(Shape.Star);
             }
+            else if(name.StartsWith("Heart")) {
+                SetShape(Shape.Heart);
+            }
             return;
         }
     }
@@ -168,6 +172,9 @@ public class Player : MonoBehaviour {
             case Shape.Star:
                 vertices = Shapes.starVertices;
                 break;
+            case Shape.Heart:
+                vertices = Shapes.heartVertices;
+                break;
             default:
                 Debug.LogErrorFormat("Unknown shape: {0}", shape);
                 return;
@@ -179,6 +186,9 @@ public class Player : MonoBehaviour {
             shapeGenerator.SetShape(vertices);
         }
         currentShape = shape;
+        if(shape == Shape.Heart) {
+            alive = false;
+        }
     }
 
 

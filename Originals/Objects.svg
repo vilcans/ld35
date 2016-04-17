@@ -15,7 +15,7 @@
    id="svg4691"
    version="1.1"
    inkscape:version="0.91 r13725"
-   inkscape:export-filename="/Users/vilcans/proj/ld35/Assets/Objects/CirclePickup.png"
+   inkscape:export-filename="/Users/vilcans/proj/ld35/Assets/Tiles/StarPickup.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    sodipodi:docname="Objects.svg">
@@ -29,10 +29,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5546875"
-     inkscape:cx="108.67618"
-     inkscape:cy="115.26468"
+     inkscape:cx="104.98254"
+     inkscape:cy="120.86882"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="g5286"
      showgrid="false"
      units="px"
      inkscape:showpageshadow="true"
@@ -86,7 +86,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="CirclePickup"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <circle
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -94,6 +94,44 @@
        cx="128"
        cy="128"
        r="55.638191" />
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="SquarePickup"
+     id="g5280"
+     inkscape:groupmode="layer"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5284"
+       width="116"
+       height="116"
+       x="70.11055"
+       y="70.11055" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g5286"
+     inkscape:label="StarPickup"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <path
+       sodipodi:type="star"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path5290"
+       sodipodi:sides="8"
+       sodipodi:cx="129.28642"
+       sodipodi:cy="127.35678"
+       sodipodi:r1="69.616074"
+       sodipodi:r2="34.808037"
+       sodipodi:arg1="0.90327027"
+       sodipodi:arg2="1.2959694"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 172.3819,182.03015 -33.64926,-21.1716 -17.63302,35.63125 -8.82304,-38.76421 -37.663527,12.72667 21.171603,-33.64926 -35.631249,-17.63302 38.764204,-8.82304 -12.726668,-37.663529 33.649267,21.171603 17.63302,-35.631249 8.82303,38.764205 37.66353,-12.726668 -21.1716,33.649258 35.63125,17.63303 -38.76421,8.82303 z"
+       inkscape:transform-center-x="0.84323781"
+       inkscape:transform-center-y="-5.8406674" />
   </g>
   <g
      inkscape:groupmode="layer"
