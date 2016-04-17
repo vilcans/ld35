@@ -63,7 +63,7 @@ public class Player : MonoBehaviour {
         if(Input.GetButton("Jump")) {
             if(groundContacts != 0) {
                 //Debug.Log("Jumping");
-                LeaveGround(Motion.jumpVelocity);
+                LeaveGround(currentShape == Shape.Circle ? Motion.jumpVelocity * 1.5f : Motion.jumpVelocity);
             }
         }
         movement = Vector2.zero;
