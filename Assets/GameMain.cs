@@ -17,7 +17,7 @@ public class GameMain : MonoBehaviour {
     public AudioSource music;
     public AudioClip deathSound;
 
-    private Dictionary<string, GameObject> prefabs;
+    public Dictionary<string, GameObject> prefabs;
 
     private Player player;
 

@@ -36,8 +36,6 @@ public class Player : MonoBehaviour {
         Star,
     }
 
-    public GameObject explosion;
-
     private Shape currentShape;
 
     // Keep track of how many intersections with currently have with the ground
@@ -126,7 +124,7 @@ public class Player : MonoBehaviour {
             return;
         }
         Debug.Log("Dying");
-        Instantiate(explosion, transform.position, Quaternion.identity);
+        Instantiate(GameMain.instance.prefabs["PlayerExplosion"], transform.position, Quaternion.identity);
         GetComponentInChildren<Renderer>().enabled = false;
         alive = false;
         GameMain.instance.OnDeath();
