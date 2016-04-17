@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class GameMain : MonoBehaviour {
 
     public GameObject[] prefabList;
+    public GameObject[] tiles;
 
     public Vector2 startPosition;
 
@@ -14,13 +15,16 @@ public class GameMain : MonoBehaviour {
     public void Start() {
 
         prefabs = new Dictionary<string, GameObject>();
-        for(int i = 0; i < prefabList.Length; ++i) {
-            GameObject obj = prefabList[i];
-            prefabs[obj.name] = obj;
-        }
-
+        AddPrefabs(prefabList);
+        AddPrefabs(tiles);
         CreateLevel();
         CreatePlayer();
+    }
+
+    private void AddPrefabs(GameObject[] list) {
+        for(int i = 0; i < list.Length; ++i) {
+            prefabs[list[i].name] = list[i];
+        }
     }
 
     public void LateUpdate() {
@@ -53,12 +57,9 @@ public class GameMain : MonoBehaviour {
         player.AddComponent<Player>();
     }
 
-    private GameObject InstantiateByIndex(int objectIndex) {
-        GameObject prefab = prefabList[objectIndex];
+    private GameObject InstantiateByIndex(int tileIndex) {
+        GameObject prefab = tiles[tileIndex];
         GameObject newObj = (GameObject)Instantiate(prefab);
-        if(prefab.name == "CirclePickup") {
-            /*ShapePickup pickup =*/ newObj.AddComponent<ShapePickup>();
-        }
         return newObj;
     }
 }

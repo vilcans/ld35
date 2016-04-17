@@ -183,11 +183,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabList:
+  - {fileID: 160930, guid: eb9301aa3aa0649369e1ca6d6a8c4b15, type: 2}
+  tiles:
   - {fileID: 137410, guid: c754c8e5c64884d61a6f53b9e90e600c, type: 2}
   - {fileID: 196316, guid: 23d7a9d2d85674a198e4cd61bc7a4eb5, type: 2}
   - {fileID: 122374, guid: 26eb4bb30c8a64a918740b02cc07a64e, type: 2}
   - {fileID: 196316, guid: 9fec833473de745fcb2e542ca734489d, type: 2}
-  - {fileID: 160930, guid: eb9301aa3aa0649369e1ca6d6a8c4b15, type: 2}
   startPosition: {x: 0, y: 2.2}
 --- !u!4 &1823573765
 Transform:
