@@ -42,9 +42,6 @@ public class Player : MonoBehaviour {
     // Keep track of how many intersections with currently have with the ground
     private int groundContacts = 0;
 
-    // Movement in last FixedUpdate
-    private Vector2 movement;
-
     private Rigidbody2D myBody;
     private Collider2D myCollider;
     private ShapeGenerator shapeGenerator;
@@ -199,10 +196,6 @@ public class Player : MonoBehaviour {
         //Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);
         //Debug.DrawLine(other.bounds.min, other.bounds.max, Color.green);
 
-        if(movement.y > 0) {
-            //Debug.LogFormat("Moving upwards at speed {0} - this is not landing", movement.y);
-            return false;
-        }
         float penetration = other.bounds.max.y - myCollider.bounds.min.y;
         return penetration < .5f;
     }
