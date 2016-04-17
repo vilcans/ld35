@@ -6,40 +6,39 @@ public class ShapeGenerator : MonoBehaviour {
     private const int outerPointCount = 16;
 
     void Start() {
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-        Mesh mesh = new Mesh();
-        meshFilter.mesh = mesh;
-
-        //const float radius = .5f;
-
-        Vector3[] vertices = new Vector3[outerPointCount + 1];
-        //CreateStarPoints(vertices, .3f, .5f);
-        CreateMeshPoints(vertices, new Vector3[] {
+        var vertices = CreateMeshPoints(new Vector3[] {
             new Vector3(-.5f, -.5f, 0),
             new Vector3(.5f, -.5f, 0),
             new Vector3(.5f, .5f, 0),
             new Vector3(-.5f, .5f, 0),
         });
-        // Triangle
-        /*CreateMeshPoints(vertices, new Vector3[] {
-            new Vector3(-.5f, -.5f, 0),
-            new Vector3(.5f, -.5f, 0),
-            new Vector3(0f, .5f, 0),
-        }); */
+        //var vertices = CreateStarPoints(vertices, .3f, .5f);
+
+        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = CreateMesh(vertices);
+    }
+
+    /// Creates a mesh with a fixed number of triangles.
+    /// Does not set the vertices.
+    public static Mesh CreateMesh(Vector3[] vertices) {
+        Mesh mesh = new Mesh();
         int centerPoint = outerPointCount;
-        vertices[centerPoint] = Vector3.zero;
         int[] triangles = new int[(outerPointCount + 1) * 3];
         for(int i = 0; i < outerPointCount; ++i) {
             triangles[i * 3 + 0] = (i + 1) % outerPointCount;
             triangles[i * 3 + 1] = i % outerPointCount;
             triangles[i * 3 + 2] = centerPoint;
         }
-
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        return mesh;
     }
 
-    private void CreateMeshPoints(Vector3[] result, Vector3[] shapeVertices) {
+    /// Create a mesh consisting of outerPointCount+1 vertices.
+    /// The shapeVertices describe the outside of the polygon.
+    public static Vector3[] CreateMeshPoints(Vector3[] shapeVertices) {
+        Vector3[] result = new Vector3[outerPointCount + 1];
+
         int resultIndex = 0;
         float verticesPerLine = (float)outerPointCount / shapeVertices.Length;
 
@@ -59,9 +58,11 @@ public class ShapeGenerator : MonoBehaviour {
             }
         }
         Assert.AreEqual(outerPointCount, resultIndex);
+        return result;
     }
 
-    private void CreateStarPoints(Vector3[] vertices, float innerRadius, float outerRadius) {
+    public static Vector3[] CreateStarPoints(float innerRadius, float outerRadius) {
+        Vector3[] vertices = new Vector3[outerPointCount + 1];
         for(int i = 0; i < outerPointCount; ++i) {
             float radius = (i % 2 == 0) ? innerRadius : outerRadius;
             float angle = Mathf.PI * 2 * i / outerPointCount;
@@ -71,5 +72,6 @@ public class ShapeGenerator : MonoBehaviour {
                 0
             );
         }
+        return vertices;
     }
 }
