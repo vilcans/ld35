@@ -105,6 +105,10 @@ public class Player : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
+        if(currentShape == Shape.Star && collision.gameObject.name.StartsWith("Box")) {
+            Destroy(collision.gameObject);
+            return;
+        }
         bool landed = IsLandCollision(collision.collider);
         if(!landed) {
             //Debug.Log("Crashed into " + collision.gameObject);
