@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
     void FixedUpdate() {
         //Debug.Log("Number of ground contacts: " + groundContacts);
         if(Input.GetButton("Jump")) {
-            if(groundContacts != 0) {
+            if(groundContacts != 0 && myBody.velocity.y <= .01f) {
                 //Debug.Log("Jumping");
                 LeaveGround(currentShape == Shape.Circle ? Motion.jumpVelocity * 1.5f : Motion.jumpVelocity);
             }
