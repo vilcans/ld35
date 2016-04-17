@@ -124,6 +124,7 @@ public class Player : MonoBehaviour {
         GetComponentInChildren<Renderer>().enabled = false;
         alive = false;
         deadTime = 0;
+        GameMain.instance.OnDeath();
     }
 
     private void Spawn() {

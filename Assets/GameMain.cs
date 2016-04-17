@@ -15,6 +15,7 @@ public class GameMain : MonoBehaviour {
     public Vector2 startPosition;
 
     public AudioSource music;
+    public AudioClip deathSound;
 
     private Dictionary<string, GameObject> prefabs;
 
@@ -65,6 +66,11 @@ public class GameMain : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Escape)) {
             Application.Quit();
         }
+    }
+
+    public void OnDeath() {
+        music.Stop();
+        music.PlayOneShot(deathSound);
     }
 
     private void CreateLevel() {
