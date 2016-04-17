@@ -48,6 +48,9 @@ public class Player : MonoBehaviour {
     private Collider2D myCollider;
     private ShapeGenerator shapeGenerator;
 
+    public bool alive;
+    public float deadTime;
+
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
@@ -57,6 +60,10 @@ public class Player : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if(!alive) {
+            deadTime += Time.deltaTime;
+            return;
+        }
         //Debug.Log("Number of ground contacts: " + groundContacts);
         if(Input.GetButton("Jump")) {
             if(groundContacts != 0 && myBody.velocity.y <= .01f) {
@@ -95,10 +102,7 @@ public class Player : MonoBehaviour {
         bool landed = IsLandCollision(collision.collider);
         if(!landed) {
             //Debug.Log("Crashed into " + collision.gameObject);
-            GetComponentInChildren<ParticleSystem>().Play();
-            GetComponentInChildren<Renderer>().enabled = false;
-            enabled = false;
-            return;
+            Die();
         }
     }
 
@@ -109,11 +113,13 @@ public class Player : MonoBehaviour {
     private void Die() {
         GetComponentInChildren<ParticleSystem>().Play();
         GetComponentInChildren<Renderer>().enabled = false;
-        enabled = false;
+        alive = false;
+        deadTime = 0;
     }
 
     private void Spawn() {
         Debug.Log("Spawning");
+        alive = true;
         transform.position = new Vector2(0, 8);
 
         SetShape(Shape.Square, false);

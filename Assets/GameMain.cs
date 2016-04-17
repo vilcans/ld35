@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class GameMain : MonoBehaviour {
@@ -10,7 +11,7 @@ public class GameMain : MonoBehaviour {
 
     private Dictionary<string, GameObject> prefabs;
 
-    private GameObject player;
+    private Player player;
 
     public void Start() {
 
@@ -28,13 +29,20 @@ public class GameMain : MonoBehaviour {
     }
 
     public void LateUpdate() {
-        Camera cam = Camera.main;
-        float xOffset = cam.orthographicSize * cam.aspect * .333f;
-        Camera.main.transform.position = new Vector3(
-            player.transform.position.x + xOffset,
-            Camera.main.transform.position.y,
-            Camera.main.transform.position.z
-        );
+        if(player.alive) {
+            Camera cam = Camera.main;
+            float xOffset = cam.orthographicSize * cam.aspect * .333f;
+            Camera.main.transform.position = new Vector3(
+                player.transform.position.x + xOffset,
+                Camera.main.transform.position.y,
+                Camera.main.transform.position.z
+            );
+        }
+        else {
+            if(player.deadTime > 3) {
+                SceneManager.LoadScene("Game");
+            }
+        }
     }
 
     private void CreateLevel() {
@@ -52,9 +60,9 @@ public class GameMain : MonoBehaviour {
     }
 
     private void CreatePlayer() {
-        player = (GameObject)Instantiate(prefabs["Player"], startPosition, Quaternion.identity);
-        player.name = "Player";
-        player.AddComponent<Player>();
+        var obj = (GameObject)Instantiate(prefabs["Player"], startPosition, Quaternion.identity);
+        obj.name = "Player";
+        player = obj.AddComponent<Player>();
     }
 
     private GameObject InstantiateByIndex(int tileIndex) {
