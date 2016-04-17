@@ -19,6 +19,10 @@ public class GameMain : MonoBehaviour {
 
     public Dictionary<string, GameObject> prefabs;
 
+    //private const int cheatColumn = 320;
+    private const int cheatColumn = 376;
+    //private const int cheatColumn = 0;
+
     private Player player;
 
     public float deadTime;
@@ -44,6 +48,12 @@ public class GameMain : MonoBehaviour {
 
         music.Play();
         dspStartTime = AudioSettings.dspTime;
+
+        if(cheatColumn != 0) {
+            float advanceTime = (cheatColumn - 8) * Motion.secondsPerSquare;
+            music.timeSamples = (int)(advanceTime * AudioSettings.outputSampleRate);
+            dspStartTime -= advanceTime;
+        }
     }
 
     public float GetTime() {
@@ -92,6 +102,9 @@ public class GameMain : MonoBehaviour {
         for(int col = 0; col < MapData.width; ++col) {
             for(int row = 0; row < MapData.height; ++row) {
                 byte objectIndex = MapData.tileData[row * MapData.width + col];
+                if(col < cheatColumn) {
+                    objectIndex = row == 7 ? (byte)2 : (byte)0xff;
+                }
                 if(objectIndex == 0xff) {
                     continue;
                 }
