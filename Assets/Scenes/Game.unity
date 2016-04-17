@@ -190,6 +190,10 @@ MonoBehaviour:
   - {fileID: 122374, guid: 26eb4bb30c8a64a918740b02cc07a64e, type: 2}
   - {fileID: 196316, guid: 9fec833473de745fcb2e542ca734489d, type: 2}
   - {fileID: 199380, guid: 9bbcaafcf34f14e3486bc615e4d2737d, type: 2}
+  - {fileID: 122374, guid: 01ccb3b2f57bf4cb89ce716c99df2435, type: 2}
+  - {fileID: 122374, guid: 158729b0a8bc7482d958ae1d4e000bf3, type: 2}
+  - {fileID: 122374, guid: a98561511dd324bb68f06c973ea4618e, type: 2}
+  - {fileID: 122374, guid: f570514f13f8a471eafb35b68ecf2bfd, type: 2}
   startPosition: {x: 0, y: 2.2}
 --- !u!4 &1823573765
 Transform:
