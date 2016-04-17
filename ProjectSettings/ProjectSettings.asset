@@ -91,7 +91,8 @@ PlayerSettings:
     Others: 1
   bundleIdentifier: com.librador.ld35
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 8300000, guid: aa1f001ec44f44e4995f9e2163472397, type: 3}
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
