@@ -72,7 +72,7 @@ public class GameMain : MonoBehaviour {
     }
 
     public void LateUpdate() {
-        if(player.alive) {
+        if(player.state == Player.State.Playing) {
             Camera cam = Camera.main;
             float xOffset = cam.orthographicSize * cam.aspect * .333f;
             Camera.main.transform.position = new Vector3(
@@ -84,7 +84,7 @@ public class GameMain : MonoBehaviour {
         else {
             deadTime += Time.deltaTime;
             if(deadTime >= restartDelay) {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene(player.state == Player.State.Won ? "Ending" : "Game");
             }
         }
 

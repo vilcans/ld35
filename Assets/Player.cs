@@ -49,7 +49,13 @@ public class Player : MonoBehaviour {
     private Collider2D myCollider;
     private ShapeGenerator shapeGenerator;
 
-    public bool alive;
+    public enum State {
+        Created,
+        Playing,
+        Dead,
+        Won,
+    }
+    public State state;
 
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
@@ -75,7 +81,7 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
-        if(transform.position.y < 0 && alive) {
+        if(transform.position.y < 0 && state == State.Playing) {
             Die();
         }
     }
@@ -134,20 +140,20 @@ public class Player : MonoBehaviour {
     }
 
     private void Die() {
-        if(!alive) {
+        if(state != State.Playing) {
             //Debug.LogWarning("Already dead");
             return;
         }
         //Debug.Log("Dying");
         Instantiate(GameMain.instance.prefabs["PlayerExplosion"], transform.position, Quaternion.identity);
         GetComponentInChildren<Renderer>().enabled = false;
-        alive = false;
+        state = State.Dead;
         GameMain.instance.OnDeath();
     }
 
     private void Spawn() {
         Debug.Log("Spawning");
-        alive = true;
+        state = State.Playing;
         transform.position = new Vector2(0, 8);
 
         SetShape(Shape.Square, false);
@@ -183,7 +189,8 @@ public class Player : MonoBehaviour {
         }
         currentShape = shape;
         if(shape == Shape.Heart) {
-            alive = false;
+            state = State.Won;
+            myBody.gravityScale = -.2f;
         }
     }
 
