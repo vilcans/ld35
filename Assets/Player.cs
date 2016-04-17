@@ -79,6 +79,9 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
+        if(transform.position.y < 0) {
+            Die();
+        }
     }
 
     private bool ButtonIsDown() {
