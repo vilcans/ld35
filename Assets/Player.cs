@@ -53,9 +53,7 @@ public class Player : MonoBehaviour {
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
         shapeGenerator = gameObject.GetComponentInChildren<ShapeGenerator>();
 
-        currentShape = Shape.Square;
-        transform.position = new Vector2(0, 8);
-        LeaveGround(0);
+        Spawn();
     }
 
     void FixedUpdate() {
@@ -81,16 +79,13 @@ public class Player : MonoBehaviour {
             Destroy(other.gameObject);
             string name = pickup.name;
             if(name.StartsWith("Square")) {
-                currentShape = Shape.Square;
-                shapeGenerator.Morph(Shapes.squareVertices);
+                SetShape(Shape.Square);
             }
             else if(name.StartsWith("Circle")) {
-                currentShape = Shape.Circle;
-                shapeGenerator.Morph(Shapes.circleVertices);
+                SetShape(Shape.Circle);
             }
             else if(name.StartsWith("Star")) {
-                currentShape = Shape.Star;
-                shapeGenerator.Morph(Shapes.starVertices);
+                SetShape(Shape.Star);
             }
             return;
         }
@@ -99,7 +94,7 @@ public class Player : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
         bool landed = IsLandCollision(collision.collider);
         if(!landed) {
-            Debug.Log("Crashed into " + collision.gameObject);
+            //Debug.Log("Crashed into " + collision.gameObject);
             GetComponentInChildren<ParticleSystem>().Play();
             GetComponentInChildren<Renderer>().enabled = false;
             enabled = false;
@@ -110,6 +105,48 @@ public class Player : MonoBehaviour {
     void OnCollisionStay2D(Collision2D collision) {
         ++groundContacts;
     }
+
+    private void Die() {
+        GetComponentInChildren<ParticleSystem>().Play();
+        GetComponentInChildren<Renderer>().enabled = false;
+        enabled = false;
+    }
+
+    private void Spawn() {
+        Debug.Log("Spawning");
+        transform.position = new Vector2(0, 8);
+
+        SetShape(Shape.Square, false);
+
+        GetComponentInChildren<Renderer>().enabled = true;
+        LeaveGround(0);
+    }
+
+    void SetShape(Shape shape, bool morph = true) {
+        Vector3[] vertices;
+        switch(shape) {
+            case Shape.Square:
+                vertices = Shapes.squareVertices;
+                break;
+            case Shape.Circle:
+                vertices = Shapes.circleVertices;
+                break;
+            case Shape.Star:
+                vertices = Shapes.starVertices;
+                break;
+            default:
+                Debug.LogErrorFormat("Unknown shape: {0}", shape);
+                return;
+        }
+        if(morph) {
+            shapeGenerator.Morph(vertices);
+        }
+        else {
+            shapeGenerator.SetShape(vertices);
+        }
+        currentShape = shape;
+    }
+
 
     private bool IsLandCollision(Collider2D other) {
         Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);

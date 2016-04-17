@@ -32,6 +32,10 @@ public class ShapeGenerator : MonoBehaviour {
         morphProgress = 0;
     }
 
+    public void SetShape(Vector3[] newVertices) {
+        sourceVertices = targetVertices = newVertices;
+    }
+
     public void Update() {
         if(morphProgress >= 1) {
             return;
