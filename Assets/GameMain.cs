@@ -20,8 +20,8 @@ public class GameMain : MonoBehaviour {
     public Dictionary<string, GameObject> prefabs;
 
     //private const int cheatColumn = 320;
-    private const int cheatColumn = 376;
-    //private const int cheatColumn = 0;
+    //private const int cheatColumn = 376;
+    private const int cheatColumn = 0;
 
     private Player player;
 
