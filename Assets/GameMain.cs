@@ -32,7 +32,7 @@ public class GameMain : MonoBehaviour {
         CreateLevel();
         CreatePlayer();
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
         music.Play();
     }
 
