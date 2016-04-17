@@ -42,6 +42,6 @@ deploy:
 	rsync -avz Build/release/* $(DEPLOY_PATH)
 
 %.gif:%.mov
-	ffmpeg -i $< -vf scale=320:-1 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=9 >$@
+	ffmpeg -i $< -vf scale=320:-1 -pix_fmt rgb24 -r 15 -f gif - | gifsicle --optimize=3 --delay=9 >$@
 
 .PHONY: release
