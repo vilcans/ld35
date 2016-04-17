@@ -51,12 +51,15 @@ public class Player : MonoBehaviour {
     public bool alive;
     public float deadTime;
 
+    private float startTime;
+
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
         shapeGenerator = gameObject.GetComponentInChildren<ShapeGenerator>();
 
         Spawn();
+        startTime = Time.time;
     }
 
     void FixedUpdate() {
@@ -71,10 +74,12 @@ public class Player : MonoBehaviour {
                 LeaveGround(currentShape == Shape.Circle ? Motion.jumpVelocity * 1.5f : Motion.jumpVelocity);
             }
         }
-        movement = Vector2.zero;
-        float speedFactor = currentShape == Shape.Star ? 2 : 1;
-        movement.x = Time.deltaTime * Motion.horizontalVelocity * speedFactor;
-        transform.position += new Vector3(movement.x, movement.y, 0);
+        //float speedFactor = currentShape == Shape.Star ? 2 : 1;
+
+        float timeSinceStart = Time.time - startTime;
+        Vector3 pos = transform.position;
+        pos.x = timeSinceStart * Motion.horizontalVelocity;
+        transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
     }
