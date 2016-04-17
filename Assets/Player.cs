@@ -51,15 +51,12 @@ public class Player : MonoBehaviour {
     public bool alive;
     public float deadTime;
 
-    private float startTime;
-
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
         shapeGenerator = gameObject.GetComponentInChildren<ShapeGenerator>();
 
         Spawn();
-        startTime = Time.time;
     }
 
     void FixedUpdate() {
@@ -76,7 +73,7 @@ public class Player : MonoBehaviour {
         }
         //float speedFactor = currentShape == Shape.Star ? 2 : 1;
 
-        float timeSinceStart = Time.time - startTime;
+        float timeSinceStart = GameMain.instance.GetTime();
         Vector3 pos = transform.position;
         pos.x = timeSinceStart * Motion.horizontalVelocity;
         transform.position = pos;

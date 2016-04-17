@@ -1,25 +1,38 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class GameMain : MonoBehaviour {
+
+    public static GameMain instance;
 
     public GameObject[] prefabList;
     public GameObject[] tiles;
 
     public Vector2 startPosition;
 
+    public AudioSource music;
+
     private Dictionary<string, GameObject> prefabs;
 
     private Player player;
 
     public void Start() {
+        instance = this;
+
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
+        Assert.IsNotNull(music, "No music");
 
         prefabs = new Dictionary<string, GameObject>();
         AddPrefabs(prefabList);
         AddPrefabs(tiles);
         CreateLevel();
         CreatePlayer();
+    }
+
+    public float GetTime() {
+        return music.timeSamples / 44100.0f;
     }
 
     private void AddPrefabs(GameObject[] list) {
