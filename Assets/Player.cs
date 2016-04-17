@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate() {
         //Debug.Log("Number of ground contacts: " + groundContacts);
-        if(ButtonIsDown()) {
+        if(GameInput.ButtonIsDown()) {
             if(groundContacts != 0 && myBody.velocity.y <= .01f) {
                 //Debug.Log("Jumping");
                 LeaveGround(currentShape == Shape.Circle ? Motion.jumpVelocity * 1.5f : Motion.jumpVelocity);
@@ -88,10 +88,6 @@ public class Player : MonoBehaviour {
 
     public float GetXAtTime(float time) {
         return time * Motion.horizontalVelocity;
-    }
-
-    private bool ButtonIsDown() {
-        return Input.GetButton("Jump") || Input.touchCount != 0;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
