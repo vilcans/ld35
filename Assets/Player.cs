@@ -30,6 +30,14 @@ static class Motion {
 }
 
 public class Player : MonoBehaviour {
+    public enum Shape {
+        Square,
+        Circle,
+        Star,
+    }
+
+    private Shape currentShape;
+
     // Keep track of how many intersections with currently have with the ground
     private int groundContacts = 0;
 
@@ -45,6 +53,7 @@ public class Player : MonoBehaviour {
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
         shapeGenerator = gameObject.GetComponentInChildren<ShapeGenerator>();
 
+        currentShape = Shape.Square;
         transform.position = new Vector2(0, 8);
         LeaveGround(0);
     }
@@ -58,7 +67,8 @@ public class Player : MonoBehaviour {
             }
         }
         movement = Vector2.zero;
-        movement.x = Time.deltaTime * Motion.horizontalVelocity;
+        float speedFactor = currentShape == Shape.Star ? 2 : 1;
+        movement.x = Time.deltaTime * Motion.horizontalVelocity * speedFactor;
         transform.position += new Vector3(movement.x, movement.y, 0);
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
@@ -71,12 +81,15 @@ public class Player : MonoBehaviour {
             Destroy(other.gameObject);
             string name = pickup.name;
             if(name.StartsWith("Square")) {
+                currentShape = Shape.Square;
                 shapeGenerator.Morph(Shapes.squareVertices);
             }
             else if(name.StartsWith("Circle")) {
+                currentShape = Shape.Circle;
                 shapeGenerator.Morph(Shapes.circleVertices);
             }
             else if(name.StartsWith("Star")) {
+                currentShape = Shape.Star;
                 shapeGenerator.Morph(Shapes.starVertices);
             }
             return;
