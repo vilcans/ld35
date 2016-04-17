@@ -70,13 +70,23 @@ public class Player : MonoBehaviour {
 
         float timeSinceStart = GameMain.instance.GetTime();
         Vector3 pos = transform.position;
-        pos.x = timeSinceStart * Motion.horizontalVelocity;
+        pos.x = GetXAtTime(timeSinceStart);
         transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
         if(transform.position.y < 0 && alive) {
             Die();
         }
+    }
+
+    void LateUpdate() {
+        Vector3 pos = transform.position;
+        pos.x = GetXAtTime(GameMain.instance.GetTime());
+        transform.position = pos;
+    }
+
+    public float GetXAtTime(float time) {
+        return time * Motion.horizontalVelocity;
     }
 
     private bool ButtonIsDown() {

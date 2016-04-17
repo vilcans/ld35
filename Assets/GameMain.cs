@@ -26,6 +26,8 @@ public class GameMain : MonoBehaviour {
     private float startDelay = .5f;
     private float restartDelay = 1.5f;
 
+    private double? dspStartTime;
+
     public IEnumerator Start() {
         instance = this;
 
@@ -39,11 +41,18 @@ public class GameMain : MonoBehaviour {
         CreatePlayer();
 
         yield return new WaitForSeconds(startDelay);
+
         music.Play();
+        dspStartTime = AudioSettings.dspTime;
     }
 
     public float GetTime() {
-        return music.timeSamples / 44100.0f;
+        if(dspStartTime == null) {
+            return 0;
+        }
+        //return music.timeSamples / 44100.0f;
+        var t = (float)(AudioSettings.dspTime - dspStartTime);
+        return t;
     }
 
     private void AddPrefabs(GameObject[] list) {
