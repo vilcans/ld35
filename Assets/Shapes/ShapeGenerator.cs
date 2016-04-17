@@ -5,21 +5,56 @@ public class ShapeGenerator : MonoBehaviour {
     /// Number of points around the circumference of the shape
     private const int outerPointCount = 16;
 
+    private MeshFilter myMeshFilter;
+    private Mesh mesh;
+
+    private Vector3[] currentVertices;
+    private Vector3[] sourceVertices;
+    private Vector3[] targetVertices;
+
+    private float morphSpeed = .1f;
+    private float morphProgress;
+
     void Start() {
-        var vertices = CreateMeshPoints(new Vector3[] {
-            new Vector3(-.5f, -.5f, 0),
-            new Vector3(.5f, -.5f, 0),
+        currentVertices = CreateMeshPoints(new Vector3[] {
             new Vector3(.5f, .5f, 0),
             new Vector3(-.5f, .5f, 0),
+            new Vector3(-.5f, -.5f, 0),
+            new Vector3(.5f, -.5f, 0),
         });
-        //var vertices = CreateStarPoints(vertices, .3f, .5f);
+        sourceVertices = currentVertices;
+        targetVertices = currentVertices;
+        //targetVertices = CreateStarPoints(.3f, .5f);
 
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-        meshFilter.mesh = CreateMesh(vertices);
+        myMeshFilter = gameObject.AddComponent<MeshFilter>();
+        mesh = CreateMesh(currentVertices);
+        myMeshFilter.mesh = mesh;
+    }
+
+    public void Morph(Vector3[] newVertices) {
+        targetVertices = newVertices;
+        morphProgress = 0;
+    }
+
+    public void Update() {
+        if(morphProgress >= 1) {
+            return;
+        }
+        morphProgress += morphSpeed * Time.deltaTime;
+        if(morphProgress >= 1) {
+            sourceVertices = targetVertices;
+            morphProgress = 1;
+        }
+
+        for(int i = 0; i < outerPointCount; ++i) {
+            currentVertices[i] = Vector3.LerpUnclamped(
+                sourceVertices[i], targetVertices[i], morphProgress
+            );
+        }
+        mesh.vertices = currentVertices;
     }
 
     /// Creates a mesh with a fixed number of triangles.
-    /// Does not set the vertices.
     public static Mesh CreateMesh(Vector3[] vertices) {
         Mesh mesh = new Mesh();
         int centerPoint = outerPointCount;
@@ -31,6 +66,7 @@ public class ShapeGenerator : MonoBehaviour {
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.MarkDynamic();
         return mesh;
     }
 
