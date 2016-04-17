@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class ScaleToCamera : MonoBehaviour {
-    void Start() {
+    void Update() {
         Camera cam = Camera.main;
         transform.localScale = new Vector3(
             cam.orthographicSize * cam.aspect * 2,
