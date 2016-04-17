@@ -87,6 +87,15 @@ public class Player : MonoBehaviour {
         Vector3 pos = transform.position;
         pos.x = GetXAtTime(GameMain.instance.GetTime());
         transform.position = pos;
+
+        float rotationSpeed = 0;
+        if(currentShape == Shape.Star) {
+            rotationSpeed = -300f;
+        }
+        else if(currentShape == Shape.Heart) {
+            rotationSpeed = 2f;
+        }
+        transform.rotation = Quaternion.Euler(0, 0, rotationSpeed * Time.time);
     }
 
     public float GetXAtTime(float time) {
