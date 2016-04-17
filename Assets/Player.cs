@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         ShapePickup pickup = other.GetComponent<ShapePickup>();
         if(pickup != null) {
-            Debug.LogFormat("Got a pickup {0}", pickup);
+            //Debug.LogFormat("Got a pickup {0}", pickup);
             Destroy(other.gameObject);
             string name = pickup.name;
             if(name.StartsWith("Square")) {
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Spawn() {
-        Debug.Log("Spawning");
+        //Debug.Log("Spawning");
         state = State.Playing;
         transform.position = new Vector2(0, 8);
 
@@ -196,11 +196,11 @@ public class Player : MonoBehaviour {
 
 
     private bool IsLandCollision(Collider2D other) {
-        Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);
-        Debug.DrawLine(other.bounds.min, other.bounds.max, Color.green);
+        //Debug.DrawLine(myCollider.bounds.min, myCollider.bounds.max, Color.red);
+        //Debug.DrawLine(other.bounds.min, other.bounds.max, Color.green);
 
         if(movement.y > 0) {
-            Debug.LogFormat("Moving upwards at speed {0} - this is not landing", movement.y);
+            //Debug.LogFormat("Moving upwards at speed {0} - this is not landing", movement.y);
             return false;
         }
         float penetration = other.bounds.max.y - myCollider.bounds.min.y;
