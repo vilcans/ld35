@@ -36,6 +36,8 @@ public class Player : MonoBehaviour {
         Star,
     }
 
+    public GameObject explosion;
+
     private Shape currentShape;
 
     // Keep track of how many intersections with currently have with the ground
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
-        if(transform.position.y < 0) {
+        if(transform.position.y < 0 && alive) {
             Die();
         }
     }
@@ -120,7 +122,7 @@ public class Player : MonoBehaviour {
             return;
         }
         Debug.Log("Dying");
-        GetComponentInChildren<ParticleSystem>().Play();
+        Instantiate(explosion, transform.position, Quaternion.identity);
         GetComponentInChildren<Renderer>().enabled = false;
         alive = false;
         GameMain.instance.OnDeath();

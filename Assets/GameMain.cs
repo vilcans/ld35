@@ -96,7 +96,8 @@ public class GameMain : MonoBehaviour {
     private void CreatePlayer() {
         var obj = (GameObject)Instantiate(prefabs["Player"], startPosition, Quaternion.identity);
         obj.name = "Player";
-        player = obj.AddComponent<Player>();
+        player = obj.GetComponent<Player>();
+        Assert.IsNotNull(player);
     }
 
     private GameObject InstantiateByIndex(int tileIndex) {
