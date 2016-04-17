@@ -12,18 +12,14 @@ public class ShapeGenerator : MonoBehaviour {
     private Vector3[] sourceVertices;
     private Vector3[] targetVertices;
 
-    private float morphSpeed = .1f;
+    private float morphSpeed = 2f;
     private float morphProgress;
 
     void Start() {
-        currentVertices = CreateMeshPoints(new Vector3[] {
-            new Vector3(.5f, .5f, 0),
-            new Vector3(-.5f, .5f, 0),
-            new Vector3(-.5f, -.5f, 0),
-            new Vector3(.5f, -.5f, 0),
-        });
-        sourceVertices = currentVertices;
-        targetVertices = currentVertices;
+        currentVertices = new Vector3[outerPointCount + 1];
+
+        sourceVertices = Shapes.squareVertices;
+        targetVertices = sourceVertices;
         //targetVertices = CreateStarPoints(.3f, .5f);
 
         myMeshFilter = gameObject.AddComponent<MeshFilter>();

@@ -38,10 +38,12 @@ public class Player : MonoBehaviour {
 
     private Rigidbody2D myBody;
     private Collider2D myCollider;
+    private ShapeGenerator shapeGenerator;
 
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
         myCollider = gameObject.GetComponentInChildren<Collider2D>();
+        shapeGenerator = gameObject.GetComponentInChildren<ShapeGenerator>();
 
         transform.position = new Vector2(0, 8);
         LeaveGround(0);
@@ -65,8 +67,18 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         ShapePickup pickup = other.GetComponent<ShapePickup>();
         if(pickup != null) {
-            //Debug.LogFormat("Got a pickup {0}", pickup);
+            Debug.LogFormat("Got a pickup {0}", pickup);
             Destroy(other.gameObject);
+            string name = pickup.name;
+            if(name.StartsWith("Square")) {
+                shapeGenerator.Morph(Shapes.squareVertices);
+            }
+            else if(name.StartsWith("Circle")) {
+                shapeGenerator.Morph(Shapes.circleVertices);
+            }
+            else if(name.StartsWith("Star")) {
+                shapeGenerator.Morph(Shapes.starVertices);
+            }
             return;
         }
     }
