@@ -100,6 +100,8 @@ public class Player : MonoBehaviour {
         bool landed = IsLandCollision(collision.collider);
         if(!landed) {
             Debug.Log("Crashed into " + collision.gameObject);
+            GetComponentInChildren<ParticleSystem>().Play();
+            GetComponentInChildren<Renderer>().enabled = false;
             enabled = false;
             return;
         }
