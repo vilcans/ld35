@@ -104,6 +104,11 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(currentShape == Shape.Star && collision.gameObject.name.StartsWith("Box")) {
+            Instantiate(
+                GameMain.instance.prefabs["BoxExplosion"],
+                collision.transform.position,
+                Quaternion.identity
+            );
             Destroy(collision.gameObject);
             return;
         }

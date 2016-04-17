@@ -287,6 +287,7 @@ MonoBehaviour:
   prefabList:
   - {fileID: 160930, guid: eb9301aa3aa0649369e1ca6d6a8c4b15, type: 2}
   - {fileID: 102462, guid: 681f3ddf2b6d34cba8421c634c8e8bc5, type: 2}
+  - {fileID: 102462, guid: 5aee6698c2da0466bbfbacbc35acf9c4, type: 2}
   tiles:
   - {fileID: 137410, guid: c754c8e5c64884d61a6f53b9e90e600c, type: 2}
   - {fileID: 196316, guid: 23d7a9d2d85674a198e4cd61bc7a4eb5, type: 2}
