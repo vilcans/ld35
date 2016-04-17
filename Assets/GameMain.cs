@@ -21,6 +21,11 @@ public class GameMain : MonoBehaviour {
 
     private Player player;
 
+    public float deadTime;
+
+    private float startDelay = .5f;
+    private float restartDelay = 1.5f;
+
     public IEnumerator Start() {
         instance = this;
 
@@ -33,7 +38,7 @@ public class GameMain : MonoBehaviour {
         CreateLevel();
         CreatePlayer();
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(startDelay);
         music.Play();
     }
 
@@ -58,7 +63,8 @@ public class GameMain : MonoBehaviour {
             );
         }
         else {
-            if(player.deadTime > 3) {
+            deadTime += Time.deltaTime;
+            if(deadTime >= restartDelay) {
                 SceneManager.LoadScene("Game");
             }
         }

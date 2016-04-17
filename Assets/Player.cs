@@ -49,7 +49,6 @@ public class Player : MonoBehaviour {
     private ShapeGenerator shapeGenerator;
 
     public bool alive;
-    public float deadTime;
 
     void Start() {
         myBody = gameObject.GetComponentInChildren<Rigidbody2D>();
@@ -60,10 +59,6 @@ public class Player : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if(!alive) {
-            deadTime += Time.deltaTime;
-            return;
-        }
         //Debug.Log("Number of ground contacts: " + groundContacts);
         if(ButtonIsDown()) {
             if(groundContacts != 0 && myBody.velocity.y <= .01f) {
@@ -120,10 +115,14 @@ public class Player : MonoBehaviour {
     }
 
     private void Die() {
+        if(!alive) {
+            Debug.LogWarning("Already dead");
+            return;
+        }
+        Debug.Log("Dying");
         GetComponentInChildren<ParticleSystem>().Play();
         GetComponentInChildren<Renderer>().enabled = false;
         alive = false;
-        deadTime = 0;
         GameMain.instance.OnDeath();
     }
 
