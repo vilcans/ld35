@@ -14,6 +14,6 @@ public static class Shapes {
     });
 
     public static Vector3[] circleVertices = ShapeGenerator.CreateStarPoints(.5f, .5f);
-    public static Vector3[] starVertices = ShapeGenerator.CreateStarPoints(.3f, .5f);
+    public static Vector3[] starVertices = ShapeGenerator.CreateStarPoints(.3f, .5f * 1.3f);
     public static Vector3[] heartVertices = ShapeGenerator.CreateStarPoints(.1f, 1.3f);
 }
