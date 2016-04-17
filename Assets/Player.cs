@@ -65,7 +65,7 @@ public class Player : MonoBehaviour {
             return;
         }
         //Debug.Log("Number of ground contacts: " + groundContacts);
-        if(Input.GetButton("Jump")) {
+        if(ButtonIsDown()) {
             if(groundContacts != 0 && myBody.velocity.y <= .01f) {
                 //Debug.Log("Jumping");
                 LeaveGround(currentShape == Shape.Circle ? Motion.jumpVelocity * 1.5f : Motion.jumpVelocity);
@@ -79,6 +79,10 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         groundContacts = 0;  // will be incresed by OnTriggerStay2D
+    }
+
+    private bool ButtonIsDown() {
+        return Input.GetButton("Jump") || Input.touchCount != 0;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
