@@ -296,9 +296,11 @@ MonoBehaviour:
   - {fileID: 122374, guid: 158729b0a8bc7482d958ae1d4e000bf3, type: 2}
   - {fileID: 122374, guid: a98561511dd324bb68f06c973ea4618e, type: 2}
   - {fileID: 122374, guid: f570514f13f8a471eafb35b68ecf2bfd, type: 2}
+  - {fileID: 122374, guid: 7b2bf98bbae154b7eb1d0bcc45654d8e, type: 2}
   startPosition: {x: 0, y: 2.2}
   music: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 4b6359660a8c0486390f25879cd1c7de, type: 3}
+  deadTime: 0
 --- !u!4 &1823573765
 Transform:
   m_ObjectHideFlags: 0
