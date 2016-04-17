@@ -2,6 +2,8 @@
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class GameMain : MonoBehaviour {
 
@@ -18,7 +20,7 @@ public class GameMain : MonoBehaviour {
 
     private Player player;
 
-    public void Start() {
+    public IEnumerator Start() {
         instance = this;
 
         music = GameObject.Find("Music").GetComponent<AudioSource>();
@@ -29,6 +31,9 @@ public class GameMain : MonoBehaviour {
         AddPrefabs(tiles);
         CreateLevel();
         CreatePlayer();
+
+        yield return new WaitForSeconds(1);
+        music.Play();
     }
 
     public float GetTime() {
