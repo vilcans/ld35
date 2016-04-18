@@ -90,7 +90,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.librador.ld35
-  bundleVersion: 1.0
+  bundleVersion: 0.2
   preloadedAssets:
   - {fileID: 8300000, guid: aa1f001ec44f44e4995f9e2163472397, type: 3}
   metroEnableIndependentInputSource: 0
@@ -332,7 +332,10 @@ PlayerSettings:
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: 11
+    2: 11
+    4: 11
   metroPackageName: ld35
   metroPackageVersion: 
   metroCertificatePath: 
