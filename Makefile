@@ -34,12 +34,15 @@ $(RELEASE_DIR)/$(FILENAME)-linux.tar.gz:
 	cp -r Build/linux Build/ziptemp/$(FILENAME)
 	tar -czf $@ --exclude '.DS_Store' -C Build/ziptemp $(FILENAME)
 
+release-android:
+	cp Build/android/$(PROJECT).apk Build/release/$(FILENAME).apk
+
 clean:
 	rm -rf Build/release
 	rm -rf Build/ziptemp
 
 deploy:
-	rsync -avz Build/release/* $(DEPLOY_PATH)
+	rsync -avz Build/release/* $(DEPLOY_PATH)/
 
 %.gif:%.mov
 	ffmpeg -i $< -vf scale=320:-1 -pix_fmt rgb24 -r 15 -f gif - | gifsicle --optimize=3 --delay=9 >$@
