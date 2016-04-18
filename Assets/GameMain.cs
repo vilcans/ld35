@@ -110,7 +110,7 @@ public class GameMain : MonoBehaviour {
                 }
                 GameObject newObj = InstantiateByIndex(objectIndex);
                 newObj.name += " " + col + "," + row;
-                newObj.transform.position = new Vector2(col, MapData.height - row);
+                newObj.transform.position = new Vector3(col, MapData.height - row, .1f);
             }
         }
     }
