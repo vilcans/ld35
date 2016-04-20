@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="256"
@@ -32,7 +33,7 @@
      inkscape:cx="104.98254"
      inkscape:cy="120.86882"
      inkscape:document-units="px"
-     inkscape:current-layer="g5286"
+     inkscape:current-layer="layer5"
      showgrid="false"
      units="px"
      inkscape:showpageshadow="true"
@@ -57,8 +58,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="PickupBG"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <rect
        style="fill:#ffe75a;fill-opacity:1;stroke:none;stroke-width:8;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5265"
@@ -66,6 +66,26 @@
        height="224"
        x="16"
        y="16" />
+    <image
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAYAAAAaLWrhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKISURB
+VHic7dMxDQAgAMAwQCb+E2SAjB20CvZs3rPvABKrDoCfGRBCBoSQASFkQAgZEEIGhJABIWRACBkQ
+QgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIG
+hJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQ
+ASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEh
+ZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRA
+CBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZ
+EEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBC
+BoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaE
+kAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJAB
+IWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFk
+QAgZEEIGhJABIWRACBkQQgaEkAEhZEAIGRBCBoSQASFkQAgZEEIGhJABIWRACBkQQgaEkAEhZEAI
+GRBCBoSQASFkQAgZEEIGhNADUeME/1NX6WkAAAAASUVORK5CYII=
+"
+       width="224"
+       height="224"
+       transform="translate(16,16)"
+       id="image5296" />
   </g>
   <g
      inkscape:label="Square"
@@ -113,7 +133,7 @@
      inkscape:groupmode="layer"
      id="g5286"
      inkscape:label="StarPickup"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <path
        sodipodi:type="star"
@@ -133,6 +153,11 @@
        inkscape:transform-center-x="0.84323781"
        inkscape:transform-center-y="-5.8406674" />
   </g>
+  <g
+     style="display:inline"
+     inkscape:label="HeartPickup"
+     id="g5292"
+     inkscape:groupmode="layer" />
   <g
      inkscape:groupmode="layer"
      id="layer3"
