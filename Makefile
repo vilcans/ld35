@@ -1,11 +1,11 @@
 PROJECT=EuclidGeomorph
-VERSION=0.2
+VERSION=0.3
 FILENAME=$(PROJECT)-$(VERSION)
 RELEASE_DIR=Build/release
 
 DEPLOY_PATH=filur:/opt/public/$(PROJECT)
 
-release: release-win release-mac release-linux release-web
+release: release-win release-mac release-linux
 
 release-web:
 	cp -r Build/web/* Build/release/
